@@ -1,0 +1,84 @@
+<h6>... user component start ...</h6>
+
+<h1>Name: {{ name }}</h1>
+
+<ul>
+  <li>{{ age }}</li>
+  <li>{{ email }}</li>
+  <li>{{ address.street }}, {{ address.city}}, {{ address.state }}</li>
+</ul>
+
+<button (click)='editUser = !editUser'>
+  {{editUser ? 'Hide' : 'Show'}} Edit User
+</button>
+<button (click)='showHobbies = !showHobbies'>
+  {{showHobbies ? 'Hide' : 'Show'}} Hobbies
+</button>
+<button (click)='showPosts = !showPosts'>
+  {{showPosts ? 'Hide' : 'Show'}} Posts
+</button>
+
+<form *ngIf='editUser'>
+  <h3>Edit User</h3>
+  <div>
+    <label for="name">Name: </label>
+    <br>
+    <input type="text" [(ngModel)]='name' name='name'>
+  </div>
+  <div>
+    <label for="age">Age: </label>
+    <br>
+    <input type="text" [(ngModel)]='age' name='age'>
+  </div>
+  <div>
+    <label for="email">Email: </label>
+    <br>
+    <input type="text" [(ngModel)]='email' name='email'>
+  </div>
+  <div>
+    <label for="Street">Street: </label>
+    <br>
+    <input type="text" [(ngModel)]='address.street' name='street'>
+  </div>
+  <div>
+    <label for="city">City:</label>
+    <br>
+    <input type="text" [(ngModel)]='address.city' name='city'>
+  </div>
+  <div>
+    <label for="state">State: </label>
+    <br>
+    <input type="text" [(ngModel)]='address.state' name='state'>
+  </div>
+</form>
+
+<div *ngIf='showHobbies'>
+  <h3>Hobbies</h3>
+
+  <form (submit)='addHobby(hobby.value)'>
+    <div>
+      <label for="hobby">Hobby: </label>
+      <!-- id value used by angular to identify field -->
+      <input type="text" #hobby>
+    </div>
+  </form>
+
+  <ul>
+    <li *ngFor='let hobby of hobbies; let i = index'>
+      {{ i }}: {{ hobby }} ... 
+      <button (click)='deleteHobby(hobby)'>x</button>
+    </li>
+  </ul>
+</div>
+
+<!-- <h3>Posts</h3>
+<ul *ngFor='let post of posts'>
+  <li>
+    <h4>{{ post.id }}, {{ post.userId }}, {{ post.title }}</h4>
+    <p>{{ post.body }}</p>
+  </li>
+</ul> -->
+
+<app-posts *ngIf='showPosts'></app-posts>
+
+<h6>... user component end ...</h6>
